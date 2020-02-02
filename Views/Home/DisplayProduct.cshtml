@@ -1,0 +1,25 @@
+@model Association
+
+<h1>@ViewBag.ProdWithCats.Name</h1>
+
+<h2>Categories</h2>
+<div>
+@foreach(var c in ViewBag.ProdWithCats.AssocCategories)
+{
+    <p>@c.Category.Name</p>
+}
+</div>
+
+<div>
+    <h2>Add Category to this Product</h2>
+    <form calss="col-5" asp-action="Process" asp-route-path="product" asp-controller="Home" method="post">
+    <select asp-for="CategoryId">
+        @foreach(var c in ViewBag.NotOnProd)
+        {
+            <option value="@c.CategoryId">@c.Name</option>
+        }
+    </select>
+    <input type="hidden" asp-for="ProductId" value="@ViewBag.ProdWithCats.ProductId">
+    <input type="submit" class="btn btn-primary" value="Add">
+    </form>
+</div>
